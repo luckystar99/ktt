@@ -1,0 +1,256 @@
+
+<!-- saved from url=(0045)https://www.bauer.uh.edu/parks/mis3371_a3.htm -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<style type="text/css">
+body,td {font-family:Comic Sans MS;Helevetica, Arial;>
+</style>
+</head>
+<script>
+function validate(){
+ if (checkSRN() && validateMonth() && sumBalances()){
+  submit();
+ }
+}
+function checkSRN(){
+  SRN = document.getElementById("SRN").value;
+  if (SRN.length < 4)
+    return true;
+
+}
+
+ function validateMonth(){
+  month = document.getElementbyId("mon").value;
+  month = document.getElemtbyTageName('input')[1];
+
+  if (!isNaN(month)){
+    parseInt(month);
+    if(month<13 && month>1){
+    return true;
+    }
+  }
+return false;
+ }
+
+ function sumBalances(){
+  sum = 0;
+  sumOut = document.getElementbyId("sum")
+  for (i=0; i < 6; i++){
+    balance = document.getElementbyId("balance" + i.toString()).value;
+   if (hasJE(i)){
+    if (!isNaN(balance)){
+    if (balance.indexOf(".")>-1){
+   decinmal =  balance.substring(balance.indexOf(".")+1);
+    if (decimal.length > 2){
+      return false;
+    }
+     balance = parseFloat(balance);
+     sum += balance;
+
+    }
+  }
+ }
+ }
+sumOut.value = sum.toString();
+if (sum.toFixed[2] == 0){
+  return true;
+}
+return false;
+}
+function hasJE(rowNum){
+  major = document.getElementbyId("major" + rowNum).value;
+  minor = document.getElementbyId("minor" +rowNum).value;
+  sub1 = document.getElementbyId("sub1" +rowNum).value;
+  sub2 = document.getElementbyId("sub2" +rowNum).value;
+  balance = document.getElementbyId("balance" + rownNum).value;
+  if (major.length > 0 && minor.length > 0 %% sub1.length > 0 && sub2.length > 0 && balance.length > 0){
+    if (!isNaN(major) && !isNaN(minor) && !isNaN(sub1) && !isNaN(sub2) && !isNaN(balance)){
+
+    }
+    return true;
+  }
+
+}
+
+<journalvoucher><srn>1234</srn><fm>11</fm><je><major>1000</major>
+<minor>1500</minor><sub1>0300</sub1><sub2>9100</sub2><ta>-123.09</ta>
+<desc>Pay Electrical Bill for March</desc></je><je><major>9000</major><minor>2500</minor>
+<sub1>0100</sub1><sub2>1000</sub2><ta>123.09</ta><desc></desc></je></journalvoucher>
+
+function createXML(){
+  SRN = document.getElementById("SRN").value;
+  month = document.getElementById("mon").value;
+  os = "<journalvoucher><srn>" + document.getElementbyId("SRN") + "</srn><fm> + + </fm>;
+ for (i=1; i<7; i++){
+  if (hasJE(i)){
+  major = document.getElementById("major" + i.toString());
+  minor = document.getElementById("minor" +i.toString());
+  sub1 = document.getElementById("sub1" + i.toString());
+  sub2 = document.getElementById("sub2" +i.toString());
+  ta = document.getElementById("ta" + i.toSrtring);
+  desc = document.getElementById("desc" + i.toString());
+
+  os += "<je><major> +major </major><minor> +minor </minor><sub1> +sub1 </sub1><sub2> +sub2 </sub2><ta> +ta </ta><desc> +desc </desc></je>"
+
+  }
+
+ }
+  os = "</journalvoucher>"
+
+  document.xmlform.xmlout.value = os;
+
+}
+function submit(){
+
+}
+</script>
+<body bgcolor="#ffffff" link="#ff0000" vlink="#cc0000">
+<center>
+<table width="100%" border="2">
+<tbody><tr><td bgcolor="#cccccc"><center><img src="./mis3371_a3_files/captsm.gif" border="2" align="top"><br>Capt. Horatio T.P. Webb</center></td><td><center><b>MIS 3371 Transaction Processing I<br>
+ASSIGNMENT #3 -- Fall 2014<br> Last Updated 11AM 8/22/2014</b></center><b>
+</b>
+</td>
+</tr>
+</tbody></table></center><p>
+This client-side data entry/validation is composed of HTML, XML and Javascript.
+</p><p>
+These components will provide the user with the ability to make client-side journals entries (the journal voucher).
+</p><p>
+</p><center><b>The Journal Entry Process</b></center>
+<p>
+The process of creating journal entries begins with pre-numbered paper document -- the journal voucher. This document contains:
+                            </p><ol>
+                              <li> a preprinted unique four-digit numeric source reference number
+                              </li><li> a maximum of six <u>journal entries per voucher</u>. Each <u>journal entry</u> contains:
+                                    <ol>
+                                            <li> four digit major account number
+                                            </li><li> four digit minor account number
+                                            </li><li> four digit sub1 account number
+                                            </li><li> four digit sub2 account number
+                                            </li><li> transaction amount (currency)
+                                            </li><li> 50 character text description for each entry
+                                    </li></ol>
+                              </li><li>the sum of the journal entry transaction amounts (which must be zero)
+                              </li><li>the entire journal voucher should be contained in a form named "jvform"
+                             </li></ol>
+<p>
+The HTML for such a journal voucher appears as:
+</p><p>
+<table border="1">
+<tbody><tr><td colspan="6" align="center"><b>Journal Voucher</b></td></tr>
+<tr><td colspan="4"><b>SRN:</b><input type="text" id='SRN" size="4" value="8010"> (4 digits)</td><td colspan="2"><b>Fiscal Month: <input type="text" id="mon" size="2" value="11"> Must be 1,2,3,...12</b></td></tr>
+<tr><td colspan="6" align="center"><b>Journal Entries</b></td></tr>
+<tr><td colspan="4"><b><center>General Ledger Account Number</center></b></td>
+<td align="center" rowspan="2"><b>Transaction<br>Amount</b></td>
+<td align="center" rowspan="2"><b>Description (max. 50 characters)</b></td>
+</tr>
+<tr>
+<td align="center"><b>Major</b></td><td align="center"><b>Minor</b></td><td align="center"><b>Sub<br>Acct 1</b></td><td align="center"><b>Sub<br>Acct 2</b></td>
+</tr>
+<tr>
+<td><input type="text" id="major1" size="4" value="1000"></td><td><input type="text" size="4" value="1000"></td><td><input type="text" size="4" value="1000"></td><td><input type="text" size="4" value="0000"></td><td align="right"><input type="text" id="balance1" size="12" align="right" value="1234.56"></td><td><input type="text" size="50" value="Record Store Sales"></td>
+</tr>
+<tr>
+<td><input type="text" id="major2" size="4" value="4000"></td><td><input type="text" size="4" value="1000"></td><td><input type="text" size="4" value="0000"></td><td><input type="text" size="4" value="0000"></td><td align="right"><input type="text" id="balance2"  size="12" align="right" value="-1000.00"></td><td><input type="text" size="50"></td>
+</tr>
+
+<tr>
+<td><input type="text" id="major3" size="4" value="4000"></td><td><input type="text" size="4" value="2000"></td><td><input type="text" size="4" value="0000"></td><td><input type="text" size="4" value="0000"></td><td align="right"><input type="text" id="balance3" size="12" value="-234.56"></td><td><input type="text" size="50"></td>
+</tr>
+
+<tr>
+<td><input type="text" id="major4" size="4"></td><td><input type="text" size="4"></td><td><input type="text" size="4"></td><td><input type="text" size="4"></td><td align="right"><input type="text" id="balance4" size="12"></td><td><input type="text" size="50"></td>
+</tr>
+
+<tr>
+<td><input type="text" id="major5" size="4"></td><td><input type="text" size="4"></td><td><input type="text" size="4"></td><td><input type="text" size="4"></td><td align="right"><input type="text" id="balance5" size="12"></td><td><input type="text" size="50"></td>
+</tr>
+
+<tr>
+<td><input type="text" id="major6" size="4"></td><td><input type="text" size="4"></td><td><input type="text" size="4"></td><td><input type="text" size="4"></td><td align="right"><input type="text" id="balance6" size="12"></td><td><input type="text" size="50"></td>
+</tr>
+<tr>
+<td colspan="4"><b>Sum of Transaction Amounts</b></td><td align="right"><input id="sum" type="text" size="12" value="0.00"></td><td> <b> (Must sum to 0.0)</b></td>
+</tr>
+<tr><td colspan="6" align="center"><input type="button" onclick="validate()" ="Validate and Submit"></td></tr>
+</tbody></table>
+</p><p>
+</p><center><b><font sixe="4">EDITING TASKS</font></b></center>
+<p>
+NOTE: Three journal entries have four 4-digit account numbers, transaction amounts and one has a journal entry description that are loaded initial using value clauses.
+</p><p>
+When you click on "Validate and Submit", your form should:
+</p><ul>
+<li>Assure that the source reference number is a four digit number -- no blanks or non-numeric characters
+</li><li>Check for valid fiscal-month numeric values: 1,2,3,..., 11,12
+</li><li>Allow for up to six detail journal entries
+</li><li>Assure that major, minor, sub1 and sub2 each contain four digit numbers
+    <br>If less than four digits are entered in major OR minor OR sub1 OR sub1, then the field should be padding with zeroes at the beginning (e.g., if the user enters "33", then the script should convert this to a four digit number "0033", if they enter "0", the script should convert this to "0000")
+    <br>Blank fields are not allowed in the major, minor, sub1. sub2 or ta fields
+    <br>However, if an account number containing ALL zeroes is INVALID (i.e., if major=0000 AND minor=0000 AND sub1=0000 AND sub2=0000, then the journal entry is considered INVALID because there will never be an Account Number composed of all zeroes)
+</li><li>Transaction amounts should be valid currency numbers (positive or negative) (i.e., a number with two digits to the right of the decimal)
+</li><li>Descriptions are always optional (i.e, this field may be empty)
+</li><li>If any of the four account fields (i.e., major, minor, sub1 or sub2) have entries (i.e., not blank), then there must be a valid transaction amount for that entry
+</li><li>If a transaction amount is entered, then a valid GL account number must be present
+</li><li>Check to assure that for the voucher, the sum of the transaction amounts is zero
+</li><li>a minimum of two rows and a maximum of six rows (i.e., journal entries) must be present
+</li></ul>
+<p>
+Each type of failure is to be reported to the user in a message (or alert) box and the form should NOT be submitted.
+</p><p>
+If the journal voucher passes all the editing tests, the script should create a <u>string of XML</u>:
+</p><ol>
+<li>The tags to be used are defined by the following DTD:
+<p>
+
+</p><pre>&lt;?xml version="1.0"?&gt;
+&lt;!DOCTYPE journalvoucher [
+&lt;!ELEMENT journalvoucher (srn, fm, je+)
+&lt;!ELEMENT srn (#PCDATA) &gt;
+&lt;!ELEMENT fm (#PCDATA) &gt;
+&lt;!ELEMENT je ( major,minor,sub1,sub2,ta,desc) &gt;
+&lt;!ELEMENT major (#PCDATA) &gt;
+&lt;!ELEMENT minor (#PCDATA) &gt;
+&lt;!ELEMENT sub1 (#PCDATA) &gt;
+&lt;!ELEMENT sub2 (#PCDATA) &gt;
+&lt;!ELEMENT ta (#PCDATA) &gt;
+&lt;!ELEMENT desc (#PCDATA) &gt;
+]
+</pre>
+<p>
+The string should be named "xmlstring" in the script. The value of "xmlstring" might look something like this:
+</p><p>
+&lt;journalvoucher&gt;&lt;srn&gt;1234&lt;/srn&gt;&lt;fm&gt;11&lt;/fm&gt;&lt;je&gt;&lt;major&gt;1000&lt;/major&gt;<br>
+&lt;minor&gt;1500&lt;/minor&gt;&lt;sub1&gt;0300&lt;/sub1&gt;&lt;sub2&gt;9100&lt;/sub2&gt;&lt;ta&gt;-123.09&lt;/ta&gt;<br>
+&lt;desc&gt;Pay Electrical Bill for March&lt;/desc&gt;&lt;/je&gt;&lt;je&gt;&lt;major&gt;9000&lt;/major&gt;&lt;minor&gt;2500&lt;/minor&gt;<br>
+&lt;sub1&gt;0100&lt;/sub1&gt;&lt;sub2&gt;1000&lt;/sub2&gt;&lt;ta&gt;123.09&lt;/ta&gt;&lt;desc&gt;&lt;/desc&gt;&lt;/je&gt;&lt;/journalvoucher&gt;
+</p><p>
+If a journal entry (i.e., a row) is empty, DO NOT create a XML data for that journal entry (i.e., row).
+</p><p>
+On the HTML page there should ALSO be:
+</p><p>
+</p><ul>
+<li>a <u>second form named "xmlform"</u>
+</li><li>with one hidden HTML object named "xmlout"
+</li><li>specify the method as "GET"
+</li><li>specify the action as "http://auckland.bauer.uh.edu/Students/parks/echoxml2.asp"
+</li></ul>
+<p>
+Once "xmlstring" is created it should be placed in the hidden HTML object "xmlout".
+</p><p>
+</p></li><li>Then submit the "xmlform" to test the contents of the form's querystring.  This server-side program will return the XML string to the user by setting the content-type to <b>txt/xml</b> and returning the querystring as the only text. The result (if IE5 or later) on the browser will be a correctly parsed XML file of the user's data.
+</li></ol>
+<p>
+</p><div style="border:2px solid black;padding:6px;width:400px;">&nbsp;<br>Regardless or whether you choose to write the assignmnet in javascript or vbscript, the  page should be named:
+<p>
+<b>a3.htm</b>
+</p><p>
+It is imperative that you use the filename EXACTLY as shown. My grading program will look ONLY for the name "a3.htm" on the CD/DVD you turn in at the end of the semester. If it doesn't find this filename, your assignment <b>WILL NOT BE GRADED</b>.
+<br>&nbsp;</p></div>
+<p>
+<a href="https://www.bauer.uh.edu/parks/mis3371.htm">Return to Parks' mis3371 Homepage</a>
+
+<form name="xmlform" method="get" action ="http://auckland.bauer.uh.edu/Students/parks/echoxml2.asp">
+  <input type="hidden" name="xmlout" />
+</form>
+</p></body></html>
